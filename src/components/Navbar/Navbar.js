@@ -1,18 +1,7 @@
-import React,{useEffect,useState} from "react";
-import supabase from "../Supabase_config";
-import signInWithGoogle from "../Login_func";
-import { signout } from "../Login_func";
+import { useAuth } from "@/context/AuthContext";
 
 export default function NavBar() {
-    const [User,setUser] = useState(null);
-    async function get_data(){
-        const { data: { user } } = await supabase.auth.getUser()
-        setUser(user);
-      }
-    useEffect(()=>{
-        get_data();
-    },[])
-
+    const { user, loading, signInWithGoogle, signOut } =useAuth()
     return (
         <div className="navbar bg-base-100">
             <div className="flex-1">
@@ -39,7 +28,7 @@ export default function NavBar() {
                 <div className="dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
-                            <img src={User ? User.user_metadata.avatar_url : null} alt="No Photo" />
+                            <img src={user ? user.user_metadata.avatar_url : null} alt="No Photo" />
                         </div>
                     </label>
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
@@ -50,7 +39,7 @@ export default function NavBar() {
                             </a>
                         </li>
                         <li><a>Settings</a></li>
-                        {User ? <li><a onClick={()=>{signout();setUser(null);}}>Logout</a></li> : <li><a onClick={signInWithGoogle}>Login</a></li>}
+                        {user ? <li><a onClick={signOut}>Logout</a></li> : <li><a onClick={signInWithGoogle}>Login</a></li>}
                     </ul>
                 </div>
             </div>
