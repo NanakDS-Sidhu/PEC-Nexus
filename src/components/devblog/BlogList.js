@@ -1,4 +1,4 @@
-import supabase from "@/lib/Supabase_config"
+import supabase from "@/lib/SupabaseConfig";
 import { useEffect, useState } from "react"
 
 export default function BlogList() {

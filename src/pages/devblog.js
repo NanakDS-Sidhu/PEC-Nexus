@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import supabase from "@/lib/Supabase_config";
+import supabase from "@/lib/SupabaseConfig";
 import BlogList from "@/components/devblog/BlogList";
 
 export default function devblogs(){
