@@ -16,8 +16,6 @@ export default function BlogList() {
             .from('Posts')
             .select('*');
             setd(Posts)
-
-            // console.log(d)
             if(error){
                 console.log(error)
             }

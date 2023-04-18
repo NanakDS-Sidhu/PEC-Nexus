@@ -31,7 +31,7 @@ export default function Card(props) {
         <h2 className="card-title">{props.post.title}</h2>
         <p>{props.post.description}</p>
         <div className="card-actions justify-end">
-        <button className="btn btn-primary">Read More</button>
+        <button className="btn btn-primary" >Read More</button>
         </div>
     </div>
     </div>
