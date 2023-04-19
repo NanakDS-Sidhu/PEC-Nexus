@@ -26,7 +26,7 @@ export default function Card(props) {
 
   return (
     <div className="card w-96 bg-base-100 shadow-xl m-4">
-    {loading?<h1>Loading</h1>:<figure><img src={img} alt="Shoes" /></figure>}
+    {loading?<h1>Loading</h1>:<figure><img src={img} alt="" /></figure>}
     <div className="card-body">
         <h2 className="card-title">{props.post.title}</h2>
         <p>{props.post.description}</p>
