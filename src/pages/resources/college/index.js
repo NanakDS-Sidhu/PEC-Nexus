@@ -1,25 +1,54 @@
-import React, { useState } from "react"
-import Card from "@/components/Resources/Card"
+import React, { useEffect, useState } from "react"
+import Carousel from "@/components/Resources/Carousel"
 import supabase from "@/lib/SupabaseConfig";
 import { useAuth } from "@/context/AuthContext";
+import Card from "@/components/Resources/Cards";
+
+export async function getServerSideProps(){
+    const { data, error } = await supabase
+        .storage
+        .from('CollegeResources').list('CSE/Sem1');
+    console.log(data ,error);
+    const res = await data.json();
+    // const resData = await data.json();
+    return {
+        props : {
+            res
+        }
+    }
+}
+
 export default function College() {
-    const {batchInfo} = useAuth();
-    let {Year:Year, Branch:Branch } = batchInfo
-    if (Branch){
-        Branch=Branch.toUpperCase()
+    // Branch and year extraction
+    const { batchInfo } = useAuth();
+    let { Year: Year, Branch: Branch } = batchInfo
+    if (Branch) {
+        Branch = Branch.toUpperCase()
     }
 
+    // All useStates
     const [url, seturl] = useState("");
     const [dataFromChild, setDataFromChild] = useState('');
     const [semActive, setSem] = useState(1);
+    const [Subjects, setSubjects] = useState([]);
+    const [loading , setLoading] = useState(true);
 
-    async function createNewBucket() {
-        const { data, error } = await supabase
-            .storage
-            .getBucket('CollegeResources')
+    useEffect(() => {
+        async function subjectList(path) {
+            const { data, error } = await supabase
+                .storage
+                .from('CollegeResources').list(path);
+            const subjects = data.map((d) => d.name);
+            console.log(subjects,error)
+            setSubjects(subjects);
+            setLoading(false);
+        }
+        if (Branch) {
+            const path = semActive == 1 ? Branch + "/Sem" + (dataFromChild * 2 - 1) : Branch + "/Sem" + (dataFromChild * 2);
+            subjectList(path);
+        }
+    }, [semActive, dataFromChild])
 
-        console.log(data, error);
-    }
     async function fileUpload(event) {
         const avatarFile = event.target.files[0]
         console.log(avatarFile)
@@ -36,13 +65,13 @@ export default function College() {
     };
 
     async function fileDownload() {
-        let sem ;
-        if (semActive===1){
-            sem = dataFromChild * 2 - 1 ;
-        }else{
+        let sem;
+        if (semActive === 1) {
+            sem = dataFromChild * 2 - 1;
+        } else {
             sem = dataFromChild * 2;
         }
-        const path ="CollegeResources/"+ Branch + "/Sem"+ sem + "/" ;
+        const path = "CollegeResources/" + Branch + "/Sem" + sem + "/";
         console.log(await supabase.storage.listBuckets(path))
         console.log(path);
         // const { data, error } = await supabase.storage.from('CollegeResources').download('public/avatar1.png')
@@ -54,8 +83,8 @@ export default function College() {
         setDataFromChild(data);
     }
     return (
-        <>
-            <Card onData={handleDataFromChild} />
+        <div>
+            <Carousel onData={handleDataFromChild} />
             {dataFromChild == 1 ?
                 <h1>First Year</h1>
                 : dataFromChild == 2 ? (
@@ -64,16 +93,25 @@ export default function College() {
                     <h1>Third Year</h1>
                 ) : <h1>Fourth Year</h1>
             }
-            <h2>{Branch}</h2>
             <div className="tabs tabs-boxed">
                 <a className={`tab ${semActive === 1 ? "tab-active" : ""}`} onClick={() => setSem(1)}>Sem {dataFromChild * 2 - 1}</a>
                 <a className={`tab ${semActive === 2 ? "tab-active" : ""}`} onClick={() => setSem(2)}>Sem {dataFromChild * 2}</a>
             </div>
-            <h1 onClick={createNewBucket}>Create</h1>
+            {loading ?
+                <h1>Loading</h1> :
+                ""
+            }
+            {Subjects?.map(s => {
+                return (
+                    <Card
+                        subject={s}
+                        description="Linear Algebra"
+                    />)
+            })}
+            {/* <h1 onClick={createNewBucket}>Create</h1> */}
             <input type="file" onChange={fileUpload} />
             <h1 onClick={fileDownload}>Download</h1>
             <img src={url} alt="hello" />
-        </>
+        </div>
     )
 }
-

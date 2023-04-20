@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from "react"
 
-export default function Card(props) {
+export default function Carousel(props) {
     const [activeSlide, setActiveSlide] = useState(1);
     useEffect(()=>{
         props.onData(activeSlide);
