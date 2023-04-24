@@ -9,7 +9,9 @@ export default function Chat() {
         async function create_message(d){
 
             const { data: { user } } = await supabase.auth.getUser()
-
+            if(!user){
+                alert("U need to login")
+            }
             const { data, error } = await supabase
             .from('Chat_Messages')
             .insert([
