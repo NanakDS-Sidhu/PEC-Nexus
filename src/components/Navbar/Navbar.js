@@ -1,15 +1,13 @@
 import { useAuth } from "@/context/AuthContext";
 
-export default function NavBar() {
+export default function NavBar(props) {
     const { user, loading, signInWithGoogle, signOut} =useAuth()
     if (loading){
         return <h1>Loading..</h1>
     }
     return (
         <div className="navbar bg-base-100">
-            <div className="flex-1">
-                <a className="btn btn-ghost normal-case text-xl">PEC Nexus</a>
-            </div>
+            {props.children}
             <div className="flex-1">
                 <a className="btn btn-ghost normal-case text-xl" href="/resources/college">College Resources</a>
             </div>
