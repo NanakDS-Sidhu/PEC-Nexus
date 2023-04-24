@@ -1,15 +1,15 @@
 import NavBar from '../components/Navbar/Navbar'
 import supabase from '@/lib/SupabaseConfig';
 export default function Home() {
-  async function fileDownload(){
-    const { data, error } = await supabase.storage.from('public').download('Post_Images/JK/Predator_3840x2160.jpg?t=2023-04-12T11%3A53%3A47.589Z')
-    https://djwsvisvriprqmnebcmz.supabase.co/storage/v1/object/public/Post_Images/JK/Predator_3840x2160.jpg?t=2023-04-12T11%3A53%3A47.589Z
-    console.log(data);
-  }
   return (
-    <>
-    <h1 onClick={fileDownload}>Home Page</h1>
-
-    </>
+    <div className="hero min-h-screen bg-base-200">
+      <div className="hero-content text-center">
+        <div className="max-w-md">
+          <h1 className="text-5xl font-bold">Hello there</h1>
+          <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+          <button className="btn btn-primary">Get Started</button>
+        </div>
+      </div>
+    </div>
   )
 }
