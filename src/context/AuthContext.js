@@ -32,10 +32,10 @@ export const AuthProvider = ({ children }) => {
       provider: 'google',
       options: {
         queryParams: {
-          access_type: 'offline',
+          access_type: 'online',
           prompt: 'consent',
         },
-        redirectTo: "https://pec-nexus.vercel.app/"
+        redirectTo: "/"
       },
     })
 
