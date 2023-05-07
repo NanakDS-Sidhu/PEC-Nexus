@@ -26,7 +26,7 @@ export default function Chat() {
             }
         }
   return (
-    <div className>
+    <div className=" fixed bottom-0 left-0 right-0 glass">
     <form onSubmit={handleSubmit(create_message)} className='flex justify-around'>
     <input type="text" placeholder="Type here" className="input w-full m-2"  {...register("Content")}/>
     <button className="btn m-2" type='submit'>Submit</button>
