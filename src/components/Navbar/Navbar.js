@@ -6,7 +6,7 @@ export default function NavBar(props) {
         return <h1>Loading..</h1>
     }
     return (
-        <div className="navbar bg-base-100 fixed z-10">
+        <div className="navbar glass fixed z-10">
             {props.children}
             <div className="flex-1">
                 <a className="btn btn-ghost normal-case text-xl" href="/resources/college">College Resources</a>
