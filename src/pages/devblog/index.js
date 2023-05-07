@@ -9,7 +9,6 @@ export default function devblogs(){
     return (
         <>
             <h1>Dev Blogs</h1>
-            <BlogForm></BlogForm>
             <BlogList></BlogList>
         </>
     )
