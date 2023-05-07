@@ -2,21 +2,6 @@ import React, { useEffect } from 'react'
 import supabase from '@/lib/SupabaseConfig'
 
 export default function Message(props) {
-    // console.log(props)
-    // async function Usersget(){
-    //     console.log("message.author_id  "+props.message.author_id.toString())
-    //     const { data, error } = await supabase.auth.admin.getUserById(props.message.author_id)
-    //     if(error){
-    //         console.log(error)
-    //     }else{
-    //         console.log(data)
-    //     }
-    // }
-
-    // useEffect(()=>{
-    //     Usersget();
-    // },[])
-
   return (
     <div>
         <div className="chat chat-start">
