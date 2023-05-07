@@ -12,6 +12,7 @@ export default function Chat() {
             if(!user){
                 alert("U need to login")
             }
+            else{
             const { data, error } = await supabase
             .from('Chat_Messages')
             .insert([
@@ -22,12 +23,13 @@ export default function Chat() {
             }else{
                 console.log("success")
             }
+            }
         }
   return (
-    <div>
-    <form onSubmit={handleSubmit(create_message)}>
-    <input type="text" {...register("Content")} ></input>
-    <button type='submit'> Submit</button>
+    <div className>
+    <form onSubmit={handleSubmit(create_message)} className='flex justify-around'>
+    <input type="text" placeholder="Type here" className="input w-full m-2"  {...register("Content")}/>
+    <button className="btn m-2" type='submit'>Submit</button>
     </form>
     </div>
   )
