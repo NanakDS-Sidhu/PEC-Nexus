@@ -17,9 +17,10 @@ export default function Drawer(props) {
         <div className="drawer-side">
             <label htmlFor="my-drawer" className="drawer-overlay"></label>
             <ul className="menu p-4 w-80 bg-base-100 text-base-content">
-            <li><a>Sidebar Item 1</a></li>
-            <li><a>Sidebar Item 2</a></li>
-            
+            <li><a href="/">Home</a></li>
+            <li><a href="/chats">Chats</a></li>
+            <li><a href="/devblog">Blogs</a></li>
+            <li><a href="/devblog/createpost">Create Post</a></li>
             </ul>
         </div>
         </div>
