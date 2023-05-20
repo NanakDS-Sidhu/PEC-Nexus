@@ -14,16 +14,20 @@ export default function College() {
     const [dataFromChild, setDataFromChild] = useState('');
     const [semActive, setSem] = useState(1);
     const [subjects , setSubjects ] = useState([]);
+    const [loading,setLoading] = useState(true);
 
     useEffect(() => {
         if (Branch) {
-            Branch = Branch.toUpperCase()
+            setLoading(true);
+            setSubjects([]);
             let b = "";
             ///////////////////////////////////////////////////////////// Complete This//////////////////////////////// 
-            if (Branch === "CSE") {
+            if (Branch === "cse") {
                 b = "Computer Science Engineering";
-            } else if (Branch === "ECE") {
+            } else if (Branch === "ece") {
                 b = "Electronics and Communication Engineering";
+            }else if (Branch === "mech"){
+                b = "Mechanical Engineering"
             }
 
             const getSubjects = async () => {
@@ -39,6 +43,7 @@ export default function College() {
                     .eq('semester',semActive);
                 console.log(R_Subjects);
                 setSubjects(R_Subjects);
+                setLoading(false);
             }
             
             getSubjects();
@@ -63,6 +68,7 @@ export default function College() {
                 <a className={`tab ${semActive === 1 ? "tab-active" : ""}`} onClick={() => setSem(1)}>Sem {dataFromChild * 2 - 1}</a>
                 <a className={`tab ${semActive === 2 ? "tab-active" : ""}`} onClick={() => setSem(2)}>Sem {dataFromChild * 2}</a>
             </div>
+            {loading && <h1>Loading..</h1>}
             {subjects?.map(s => {
                 return (
                     <Card
