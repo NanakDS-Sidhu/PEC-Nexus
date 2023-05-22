@@ -13,8 +13,8 @@ export default function College() {
     // All useStates
     const [dataFromChild, setDataFromChild] = useState('');
     const [semActive, setSem] = useState(1);
-    const [subjects , setSubjects ] = useState([]);
-    const [loading,setLoading] = useState(true);
+    const [subjects, setSubjects] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (Branch) {
@@ -26,37 +26,43 @@ export default function College() {
                 b = "Computer Science Engineering";
             } else if (Branch === "ece") {
                 b = "Electronics and Communication Engineering";
-            }else if (Branch === "mech"){
+            } else if (Branch === "mech") {
                 b = "Mechanical Engineering"
             }
 
             const getSubjects = async () => {
+
                 let { data: R_Branch, e1 } = await supabase
                     .from('R_Branch')
-                    .select("branch_id")
-                    .eq('branch_name', b)
+                    .select("Subject")
+                    .eq('Branch', b)
+                    .eq('Semester',semActive);
+                
+                R_Branch = R_Branch?.map(x=>x.Subject);
 
                 let { data: R_Subjects, e2 } = await supabase
                     .from('R_Subjects')
                     .select('*')
-                    .eq('branch_id', R_Branch[0].branch_id)
-                    .eq('semester',semActive);
-                console.log(R_Subjects);
+                    .in("subject_code",R_Branch);
+
                 setSubjects(R_Subjects);
                 setLoading(false);
             }
-            
             getSubjects();
         }
-    }, [Branch,semActive])
+        else {
+            setLoading(false);
+            return;
+        }
+    }, [Branch, semActive])
 
     const handleDataFromChild = (data) => {
         setDataFromChild(data);
     }
     return (
         <div>
-            <Carousel onData={handleDataFromChild} />
-            {dataFromChild == 1 ?
+            {/* <Carousel onData={handleDataFromChild} /> */}
+            {/* {dataFromChild == 1 ?
                 <h1>First Year</h1>
                 : dataFromChild == 2 ? (
                     <h1>Second Year</h1>
@@ -67,8 +73,8 @@ export default function College() {
             <div className="tabs tabs-boxed">
                 <a className={`tab ${semActive === 1 ? "tab-active" : ""}`} onClick={() => setSem(1)}>Sem {dataFromChild * 2 - 1}</a>
                 <a className={`tab ${semActive === 2 ? "tab-active" : ""}`} onClick={() => setSem(2)}>Sem {dataFromChild * 2}</a>
-            </div>
-            {loading && <h1>Loading..</h1>}
+            </div> */}
+            {loading && <button className="btn loading">loading</button>}
             {subjects?.map(s => {
                 return (
                     <Card
