@@ -24,7 +24,7 @@ export default function ChatList() {
     })
     .subscribe()
   return (
-    <div className='pt-16 pb-16 from-primary to-secondary bg-gradient-to-br' >
+    <div className='py-16 px-4 from-primary to-secondary bg-gradient-to-br' >
         {messages.map((message)=>{
             return (
                 <Message message={message}></Message>
