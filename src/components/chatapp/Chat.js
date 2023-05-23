@@ -4,7 +4,7 @@ import supabase from '@/lib/SupabaseConfig';
 import { useForm } from 'react-hook-form';
 
 export default function Chat() {
-    const { register, handleSubmit} = useForm();
+    const { register, handleSubmit,reset} = useForm();
         // const [message,setMessage]=useState("");
         async function create_message(d){
 
@@ -13,15 +13,16 @@ export default function Chat() {
                 alert("U need to login")
             }
             else{
-            const { data, error } = await supabase
-            .from('Chat_Messages')
-            .insert([
-            { Content:d.Content,author_id:user.id},
-            ])
-            if(error){
-                console.log(error)
-            }else{
-                console.log("success")
+            if(d.content!=""){
+                const { data, error } = await supabase
+                .from('Chat_Messages')
+                .insert([
+                { Content:d.Content,author_id:user.id},
+                ])
+                if(error){
+                    console.log(error)
+                }
+                reset(d);
             }
             }
         }
