@@ -21,7 +21,16 @@ export default function Card(props) {
                 <h2 className="card-title">{props.subject}</h2>
                 <p>{props.description}</p>
                 <div className="card-actions justify-end">
-                    <button className="btn btn-primary" onClick={()=>router.push(router.asPath+"/pastYearMaterial/"+props.description)}>Resources</button>
+                
+                    <div className="dropdown dropdown-top">
+                        <label tabIndex={0} className="btn btn-primary">Resources</label>
+                        <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                            <li><a href={router.asPath+"/pastYearMaterial/"+props.description+"/assignquiz"}>Assignment & Quiz</a></li>
+                            <li><a href={router.asPath+"/pastYearMaterial/"+props.description+"/midsem"}>Mid Semester</a></li>
+                            <li><a href={router.asPath+"/pastYearMaterial/"+props.description+"/endsem"}>End Semester</a></li>
+                        </ul>
+                    </div>
+                    {/* <button className="btn btn-primary" onClick={()=>router.push(router.asPath+"/pastYearMaterial/"+props.description)}>Resources</button> */}
                     <button className="btn btn-primary" onClick={()=>router.push(router.asPath+"/feedback/"+props.description)}>Feedback</button>
                 </div>
             </div>
