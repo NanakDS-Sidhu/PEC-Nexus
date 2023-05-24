@@ -44,7 +44,6 @@ export default function College() {
                     .from('R_Subjects')
                     .select('*')
                     .in("subject_code",R_Branch);
-
                 setSubjects(R_Subjects);
                 setLoading(false);
             }
@@ -60,7 +59,7 @@ export default function College() {
         setDataFromChild(data);
     }
     return (
-        <div>
+        <div style={{"margin":"2%"}}>
             {/* <Carousel onData={handleDataFromChild} /> */}
             {/* {dataFromChild == 1 ?
                 <h1>First Year</h1>

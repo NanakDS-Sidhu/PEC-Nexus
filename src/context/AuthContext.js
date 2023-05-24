@@ -71,8 +71,6 @@ export const AuthProvider = ({ children }) => {
       batchInfo.Year = year;
       batchInfo.Branch = branch;
     }
-    console.log(batchInfo);
-
   }
 
   const value = {
