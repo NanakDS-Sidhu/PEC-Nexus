@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }) => {
       options: {
         queryParams: {
           access_type:'offline',
-          prompt: 'consent',
+          // prompt: 'consent',
         },
         redirectTo: getURL(path)
       },
