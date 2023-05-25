@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
           access_type:'offline',
           prompt: 'consent',
         },
-        redirectTo: "/"
+        redirectTo: "https://pec-nexus-eight.vercel.app/"
       },
     })
 
