@@ -1,7 +1,9 @@
 import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/router";
 
 export default function NavBar(props) {
     const { user, loading, signInWithGoogle, signOut} =useAuth()
+    const router = useRouter();
     if (loading){
         return <h1>Loading..</h1>
     }
@@ -43,7 +45,7 @@ export default function NavBar(props) {
                             </a>
                         </li>
                         <li><a>Settings</a></li>
-                        {user ? <li><a onClick={signOut}>Logout</a></li> : <li><a onClick={signInWithGoogle}>Login</a></li>}
+                        {user ? <li><a onClick={signOut}>Logout</a></li> : <li><a onClick={()=>signInWithGoogle(router.pathname)}>Login</a></li>}
                     </ul>
                 </div>
             </div>

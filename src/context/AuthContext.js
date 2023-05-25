@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
     }
   }, [])
 
-  const signInWithGoogle = async () => {
+  const signInWithGoogle = async (path) => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
           access_type:'offline',
           prompt: 'consent',
         },
-        redirectTo: "https://pec-nexus-eight.vercel.app/"
+        redirectTo: path
       },
     })
 
