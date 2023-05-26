@@ -48,10 +48,10 @@ export default function Feedback() {
             setFeedbacks(R_Feedback);
         }
         if (router.isReady){
+            console.log(router.query);
             getFeedbacks();
-
         }
-    }, [])
+    },[router.isReady])
     return (
         <>
             <h1>{router.query.subjectid}</h1>
