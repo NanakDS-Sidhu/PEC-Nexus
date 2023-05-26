@@ -39,7 +39,7 @@ export default function Message(props) {
         {Profile?Profile.User_name:"[Deleted]"}       
         {/* <time className="text-xs opacity-50">12:45</time> */}
     </div>
-    <div className="chat-bubble">{props.message.Content}</div>
+    <div className="chat-bubble max-w-sm "><p className=' w-full overflow-hidden'>{props.message.Content}</p></div>
     </div>
     </div>
   )
