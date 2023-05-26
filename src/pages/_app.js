@@ -8,7 +8,6 @@ export default function App({ Component, pageProps }) {
     <AuthProvider>
       <Drawer>
         <Component {...pageProps} />
-        <Footer />
       </Drawer>
       
     </AuthProvider>
