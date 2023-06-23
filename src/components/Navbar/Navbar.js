@@ -1,5 +1,6 @@
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function NavBar(props) {
     const { user, loading, signInWithGoogle, signOut} =useAuth()
@@ -11,7 +12,7 @@ export default function NavBar(props) {
         <div className="navbar glass z-10">
             {props.children}
             <div className="flex-1">
-                <a className="btn btn-ghost normal-case text-xl" href="/resources">College Resources</a>
+                <Link className="btn btn-ghost normal-case text-xl" href="/resources">College Resources</Link>
             </div>
             <div className="flex-none">
                 <div className="dropdown dropdown-end">
@@ -39,13 +40,13 @@ export default function NavBar(props) {
                     </label>
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         <li>
-                            <a className="justify-between">
+                            <Link className="justify-between">
                                 Profile
                                 <span className="badge">New</span>
-                            </a>
+                            </Link>
                         </li>
                         <li><a>Settings</a></li>
-                        {user ? <li><a onClick={signOut}>Logout</a></li> : <li><a onClick={()=>signInWithGoogle(router.pathname)}>Login</a></li>}
+                        {user ? <li><Link onClick={signOut}>Logout</Link></li> : <li><Link onClick={()=>signInWithGoogle(router.pathname)}>Login</Link></li>}
                     </ul>
                 </div>
             </div>

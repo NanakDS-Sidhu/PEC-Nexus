@@ -1,6 +1,7 @@
 import { useAuth } from '@/context/AuthContext'
 import { useEffect, useState } from 'react'
 import supabase from '@/lib/SupabaseConfig';
+import Link from 'next/link';
 
 export default function ChatSidebar() {
   const { user, loading, signInWithGoogle, signOut}=useAuth()
@@ -45,13 +46,13 @@ const Chat_Members = supabase.channel('custom-all-channel')
 
   return (
     <div className="h-full w-1/4">
-            <h1><a href="/group">Home</a></h1>
+            <h1><Link href="/group">Home</Link></h1>
       {
     grps.map((obj)=>{
       return(
         <div className='flex justify-between border-solid border-2 border-indigo-600 p-2'>
                 <h1>
-      <a href={"/group/"+obj.Group.toString()}>{obj.Group}</a>
+      <Link href={"/group/"+obj.Group.toString()}>{obj.Group}</Link>
       </h1>
       <button className="btn btn-active btn-accent" onClick={()=>{Leave(obj.Group)}}>Leave</button>
         </div>
